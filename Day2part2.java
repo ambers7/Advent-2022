@@ -18,6 +18,9 @@ public class Day2part2 {
       System.out.println(winlosedraw);
       int score = 0;
       for (int i = 0;i<opp.size();i++) {
+        /*find out what shape you need to win,
+        add the points for that shape, add the points
+        for lose/draw/win (X/Y/Z)*/
         //add score for shape you selected
         if (you.get(i).equals("X")) { //rock
           score+=1;
