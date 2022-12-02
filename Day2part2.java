@@ -14,42 +14,53 @@ public class Day2part2 {
         opp.add(input.next());
         winlosedraw.add(input.next());
       }
-      System.out.println(opp);
-      System.out.println(winlosedraw);
       int score = 0;
       for (int i = 0;i<opp.size();i++) {
         /*find out what shape you need to win,
         add the points for that shape, add the points
         for lose/draw/win (X/Y/Z)*/
-        //add score for shape you selected
-        if (you.get(i).equals("X")) { //rock
-          score+=1;
-        } else if (you.get(i).equals("Y")) { //paper
-          score+=2;
-        } else { //scissors
+        //win lose draw points
+        if (winlosedraw.get(i).equals("Y")) { //draw
           score+=3;
+        } else if (winlosedraw.get(i).equals("Z")) { //win
+          score+=6;
         }
-        //win lose points
+        //shape points
         //A,X: rock, B,Y: paper, C,Z: scissors
         if (opp.get(i).equals("A")) { //rock
-          if (you.get(i).equals("Y")) { //paper
-            score+=6;
-          } else if (you.get(i).equals("X")) {//draw
+          if (winlosedraw.get(i).equals("Y")) { //draw
+            //rock so add 1
+            score+=1;
+          } else if (winlosedraw.get(i).equals("X")) { //lose
+            //scissors so add 3
             score+=3;
+          } else { //win
+            //paper so add 2
+            score+=2;
           }
         }
         if (opp.get(i).equals("B")) { //paper
-          if (you.get(i).equals("Z")) { //scissors
-            score+=6;
-          } else if (you.get(i).equals("Y")) {//draw
+          if (winlosedraw.get(i).equals("Y")) { //draw
+            //paper so add 2
+            score+=2;
+          } else if (winlosedraw.get(i).equals("X")) {//lose
+            //rock so add 1
+            score+=1;
+          } else { //win
+            //scissors so add 3
             score+=3;
           }
         }
         if (opp.get(i).equals("C")) { //scissors
-          if (you.get(i).equals("X")) { //rock
-            score+=6;
-          } else if (you.get(i).equals("Z")) {//draw
+          if (winlosedraw.get(i).equals("Y")) { //draw
+            //scissors so add 3
             score+=3;
+          } else if (winlosedraw.get(i).equals("X")) {//lose
+            //paper so add 2
+            score+=2;
+          } else { //win
+            //rock so add 1
+            score+=1;
           }
         }
       }
