@@ -12,20 +12,43 @@ public class Day6part1 {
       while (input.hasNext()) {
         text+=input.nextLine();
       }
-      int count = 0; //add count to index+1 to get marker
+      int index = 0;
       ArrayList<String> fourchar = new ArrayList<String>();
-      fourchar.add(""+text.charAt(0));
-      fourchar.add(""+text.charAt(1));
-      fourchar.add(""+text.charAt(2));
-      fourchar.add(""+text.charAt(3));
-      for (int i = 0;i<text.length();i++) {
-        //compare first one and box it with three, if first one
-        //is duplicated somewhere then make a diff box with 2 3 4 5
-        //and move past the first one
+      //add first four characters
+      for (int j=0;j<4;j++) {
+        fourchar.add(""+text.charAt(j));
       }
       System.out.println(fourchar);
+      System.out.println(noRepeat(fourchar));
+      for (int i = 0;i<text.length();i++) {
+        if (noRepeat(fourchar)) {
+          index = i;
+          System.out.println("no repeat, index: "+index+"i: "+i);
+          break;
+        } else {
+          if (i+4<text.length()) {
+            fourchar.remove(0);
+            fourchar.add(""+text.charAt(i+4));
+            System.out.println(fourchar+"I: "+i);
+          }
+        }
+      }
+      System.out.println(index+4); //since need to add the 3 more chars to the end of the array and an extra since the very first character isnt counted
     } catch (FileNotFoundException ex) {
       System.out.println("file not found");
     }
+  }
+  //see if in arraylist of size 4 any characters repeat
+  //if no repeats then true, if repeats then false
+  public static boolean noRepeat(ArrayList<String> list) {
+    boolean tf = true;
+    for (int i = 0;i<4;i++) {
+      for (int j = i+1;j<4;j++) {
+        if (list.get(i).equals(list.get(j))) {
+          tf = false;
+        }
+      }
+    }
+    return tf;
   }
 }
